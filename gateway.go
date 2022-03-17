@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/tencentyun/scf-go-lib/cloudfunction"
+	"github.com/tencentyun/scf-go-lib/events"
 )
 
 // ListenAndServe is a drop-in replacement for
@@ -20,8 +20,7 @@ func ListenAndServe(addr string, h http.Handler) error {
 	}
 
 	gw := NewGateway(h)
-
-	lambda.StartHandler(gw)
+	cloudfunction.StartHandler(gw)
 
 	return nil
 }
@@ -39,7 +38,7 @@ type Gateway struct {
 
 // Invoke Handler implementation
 func (gw *Gateway) Invoke(ctx context.Context, payload []byte) ([]byte, error) {
-	evt := events.APIGatewayProxyRequest{}
+	evt := events.APIGatewayRequest{}
 
 	if err := json.Unmarshal(payload, &evt); err != nil {
 		return nil, err

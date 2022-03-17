@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/apex/gateway"
+	"github.com/leonco/gateway"
 	"github.com/tj/assert"
 )
 
@@ -28,5 +28,5 @@ func TestGateway_Invoke(t *testing.T) {
 
 	payload, err := gw.Invoke(context.Background(), e)
 	assert.NoError(t, err)
-	assert.JSONEq(t, `{"body":"Hello World from Go\n", "headers":{"Content-Type":"text/plain; charset=utf8"}, "multiValueHeaders":{}, "statusCode":200}`, string(payload))
+	assert.JSONEq(t, `{"isBase64Encoded":false,"statusCode":200,"headers":{"Content-Type":"text/plain; charset=utf8"},"body":"Hello World from Go\n"}`, string(payload))
 }
