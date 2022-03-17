@@ -20,7 +20,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/apex/gateway"
+	"github.com/leonco/gateway"
 )
 
 func main() {
